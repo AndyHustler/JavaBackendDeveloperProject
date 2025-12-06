@@ -1,5 +1,7 @@
 ## Проект по второму блоку обучения Java Backend Developer
 
+По техническим причинам - не смог поднять docker на своей ОС Windows - в качестве БД используется com.h2database
+
 [Swagger UI с комментариями к ендпоинтам](http://localhost:8080/swagger-ui/index.html)
 
 ### Функционал пользователя
