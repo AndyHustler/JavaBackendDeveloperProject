@@ -24,13 +24,13 @@ public class AuthController {
     private final AuthService service;
 
     @PostMapping("/signin")
-    @Operation(summary = "Авторизация и получение cookie")
+    @Operation(summary = "Авторизация с указанием почты и пароля уже зарегистрированного пользователя")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         return service.authentication(loginRequest);
     }
 
     @PostMapping("/signup")
-    @Operation(summary = "Регистрация")
+    @Operation(summary = "Регистрация с указанием почты и пароля")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         return service.registration(signUpRequest);
     }

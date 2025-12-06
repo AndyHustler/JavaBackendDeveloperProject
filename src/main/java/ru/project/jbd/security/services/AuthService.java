@@ -99,7 +99,7 @@ public class AuthService {
                         .userName(signUpRequest.username())
                         .email(signUpRequest.email())
                         .password(encoder.encode(signUpRequest.password()))
-                        .role(roles)
+                        .roles(roles)
                         .build();
         userRepository.save(user);
         log.info("New user: " + user.toString());

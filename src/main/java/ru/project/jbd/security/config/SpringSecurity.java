@@ -52,10 +52,13 @@ public class SpringSecurity {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/auth/**").permitAll()
-                .requestMatchers("/swagger-ui/**", "/swagger-resources/*", "/v3/api-docs/**").permitAll()
                 .requestMatchers("/user-api/**").hasRole("ADMIN")
-                .requestMatchers("/").permitAll()
+                .requestMatchers("/auth/**",
+                                "/error",
+                                "/swagger-ui/**", 
+                                "/swagger-resources/*", 
+                                "/v3/api-docs/**",
+                                "/").permitAll()
                 .anyRequest().authenticated()
             )
             .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))

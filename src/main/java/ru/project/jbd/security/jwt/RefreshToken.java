@@ -19,7 +19,7 @@ import jakarta.persistence.*;
 public class RefreshToken {
     
     @Id
-    private Integer id;
+    private Long id;
 
     @OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @MapsId

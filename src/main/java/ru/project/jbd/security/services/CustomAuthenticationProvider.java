@@ -29,7 +29,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
         UserDetails principal = userDetailsService.loadUserByUsername(name);
         String savedPassword = principal.getPassword();
         if (!passwordEncoder.matches(password, savedPassword)) {
-            throw new BadCredentialsException("Неверный пароль");
+            throw new BadCredentialsException("Wrong password");
         }
         return new UsernamePasswordAuthenticationToken(principal, password, principal.getAuthorities());
     }
