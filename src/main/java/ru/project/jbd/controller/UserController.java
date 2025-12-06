@@ -16,7 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/user-api")
+@RequestMapping("/app/user-api")
 @RequiredArgsConstructor
 @Tag(name = "Контроллер пользователей", description = "API для выполнения операций с пользователями. Доступно только администратору")
 public class UserController {

@@ -18,7 +18,7 @@ import ru.project.jbd.domain.dto.TaskDto;
 import ru.project.jbd.domain.service.TaskService;
 
 @Controller
-@RequestMapping("/task-api")
+@RequestMapping("/app/task-api")
 @RequiredArgsConstructor
 @Tag(name = "Задачи", description = "API для выполнения операций с задачами")
 public class TaskController {

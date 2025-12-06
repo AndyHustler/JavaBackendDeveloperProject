@@ -16,7 +16,7 @@ import ru.project.jbd.domain.dto.TaskGroupDto;
 import ru.project.jbd.domain.service.TaskGroupService;
 
 @Controller
-@RequestMapping("/task-group-api")
+@RequestMapping("/app/task-group-api")
 @RequiredArgsConstructor
 @Tag(name = "Группы задач", description = "API для выполнения операций с группами задач")
 public class TaskGroupController {
