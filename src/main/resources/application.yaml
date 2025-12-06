@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: jbd
+  main:
+    banner-mode: off
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    url: jdbc:h2:mem:security-security
+    driverClassName: org.h2.Driver
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      naming:
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: true
+
+app:
+  jwt:
+    jwtCookieName: jwt-cookie
+    jwtRefreshCookieName: jwt-cookie-refresh
+    jwtSecret: 53A73E5F1C4E0A2D3B5F2D784E6A1B423D6F247D1F6E5C3A596D635A75327855
+    jwtExpirationMs: 86400000
+    jwtRefreshExpirationMs: 86400000
+  path:
+    token:
+      sign: /app
+      refresh: /auth/refresh
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+    enabled: true
+  api-docs:
+    path: /v3/api-docs
+  show-actuator: true
+
+server:
+  port: 8080
