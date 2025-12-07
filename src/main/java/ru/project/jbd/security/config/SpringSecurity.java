@@ -52,12 +52,18 @@ public class SpringSecurity {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/user-api/**").hasRole("ADMIN")
+                .requestMatchers("/app/user-api/**").hasRole("ADMIN")
                 .requestMatchers("/auth/**",
+                                "/actuator",
+                                "/actuator/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/swagger-resources/*",
                                 "/error",
-                                "/swagger-ui/**", 
-                                "/swagger-resources/*", 
-                                "/v3/api-docs/**",
+                                "/api-docs/**",
+                                "/api-docs",
+                                "/swagger-ui/**",
+                                "/v3/api-docs*/**",
                                 "/").permitAll()
                 .anyRequest().authenticated()
             )

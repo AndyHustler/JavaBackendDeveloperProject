@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import ru.project.jbd.domain.dto.StatusCount;
 import ru.project.jbd.domain.dto.TaskDto;
 import ru.project.jbd.domain.service.TaskService;
 
@@ -55,6 +56,13 @@ public class TaskController {
     @Operation(summary = "Поиск задач по id группы доступен авторизованным пользователям")
     public List<TaskDto> listTasksByGroupId(@PathVariable(name = "id") Long id) {
         return taskService.listAllByGroupId(id);
+    }
+
+    @GetMapping("/taskStatisticByStatus")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Получение статистики по статусам задач доступно авторизованным пользователям с ролью ADMIN")
+    public StatusCount getStatisticByStatus() {
+        return taskService.getStatisticByStatus();
     }
 
     @PostMapping("/create")

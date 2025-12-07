@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import ru.project.jbd.domain.dto.StatusCount;
 import ru.project.jbd.domain.dto.TaskDto;
 import ru.project.jbd.domain.mapper.TaskMapper;
 import ru.project.jbd.domain.model.ETaskStatus;
@@ -59,7 +60,7 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public List<TaskDto> listAllByGroupId(Long id) {
-        return taskMapper.toDtoList(repository.findAllByTaskGroupId(id));
+        return taskMapper.toDtoList(repository.getAllByTaskGroupId(id));
     }
 
     @Override
@@ -118,5 +119,10 @@ public class TaskServiceImpl implements TaskService{
         Task task = getTaskById(id);
         task.setTaskStatus(ETaskStatus.valueOf(status));
         return taskMapper.toDto(repository.save(task));
+    }
+
+    @Override
+    public StatusCount getStatisticByStatus() {
+        return repository.getStatisticByStatus();
     }
 }
