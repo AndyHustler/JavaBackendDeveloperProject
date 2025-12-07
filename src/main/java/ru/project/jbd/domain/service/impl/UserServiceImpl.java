@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
      * @return обновленный пользователь
      */
     public User setRoleAdmin(User user) {
-        if(user.hasRole(ERole.ROLE_ADMIN)) {
+        if(!user.hasRole(ERole.ROLE_ADMIN)) {
             user.setRoles(ERole.admin());
             return save(user);
         }
