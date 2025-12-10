@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import ru.project.jbd.exception.TokenRefreshException;
-import ru.project.jbd.domain.model.User;
 import ru.project.jbd.repository.RefreshTokenRepository;
 import ru.project.jbd.security.jwt.RefreshToken;
 
@@ -29,12 +28,13 @@ public class RefreshTokenService {
         return refreshTokenRepository.findByToken(token);
     }
 
-    public RefreshToken createRefreshToken(User user) {
-        log.info("#createRefreshToken user = " + user.toString());
-        if(refreshTokenRepository.findById(user.getId()).isPresent()) return refreshTokenRepository.findById(user.getId()).get();
-        
+    public RefreshToken createRefreshToken(UserDetailsImpl userDetails) {
+        log.info("#createRefreshToken user = " + userDetails.toString());
+
+        if(refreshTokenRepository.findById(userDetails.getId()).isPresent()) return refreshTokenRepository.findById(userDetails.getId()).get();
+
         RefreshToken refreshToken = new RefreshToken();
-        refreshToken.setUser(user);
+        refreshToken.setId(userDetails.getId());
         refreshToken.setExpiryDate(Instant.now().plusMillis(refreshTokenDurationMs));
         refreshToken.setToken(UUID.randomUUID().toString());
         log.info("#createRefreshToken created refreshToken  = " + refreshToken.toString());

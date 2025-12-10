@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import ru.project.jbd.domain.model.User;
 import jakarta.persistence.*;
 
 @Setter
@@ -21,10 +20,10 @@ public class RefreshToken {
     @Id
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    /*@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @MapsId
     @JoinColumn(name = "id")
-    private User user;
+    private User user;*/
 
     @Column(nullable = false, unique = true)
     private String token;

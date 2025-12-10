@@ -3,6 +3,8 @@ package ru.project.jbd.domain.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -34,7 +36,8 @@ public class User {
 
     @Column(name = "user_name", unique = true)
     private String username;
-
+    
+    @JsonIgnore
     private String password;
 
     @Column(unique = true)

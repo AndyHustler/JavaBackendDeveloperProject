@@ -49,15 +49,13 @@ public class AuthService {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         log.info("#authentication UserDetails = " + userDetails);
 
-        User user = userRepository.findById(userDetails.getId()).get();
-        log.info("#authentication User = " + user);
         ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
 
         List<String> roles = userDetails.getAuthorities().stream()
             .map(item -> item.getAuthority())
             .collect(Collectors.toList());
         log.info("Generating refresh token by id = " + userDetails.getId());
-        RefreshToken refreshToken = refreshTokenService.createRefreshToken(user);
+        RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails);
         
         ResponseCookie jwtRefreshCookie = jwtUtils.generateRefreshJwtCookie(refreshToken.getToken());
         log.info("#authentication jwtCookie = " + jwtCookie.toString());
@@ -128,10 +126,11 @@ public class AuthService {
         if ((refreshToken != null) && (refreshToken.length() > 0)) {
         return refreshTokenService.findByToken(refreshToken)
             .map(refreshTokenService::verifyExpiration)
-            .map(RefreshToken::getUser)
-            .map(user -> {
+            .map(RefreshToken::getId)
+            .map(userId -> {
+                User user = userRepository.findById(userId).get();
                 ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(user);
-                
+
                 return ResponseEntity.ok()
                     .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
                     .body(new MessageResponse("Token успешно обновлен!"));
